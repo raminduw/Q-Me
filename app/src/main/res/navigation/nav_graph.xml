@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/create_destination">
+
+    <fragment
+        android:id="@+id/create_destination"
+        android:name="com.ramindu.weeraman.myapplication.ui.mainScreen.ServiceSelectionFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_service_selection">
+
+        <action
+            android:id="@+id/action_ServiceSelectionFragment_to_CreateEventFragment"
+            app:destination="@id/CreateEventFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_ManageFragment"
+            app:destination="@id/event_list" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CreateEventFragment"
+        android:name="com.ramindu.weeraman.myapplication.ui.createEvent.CreateEventFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_create_event">
+
+        <action
+            android:id="@+id/action_CreateEventFragment_to_QRCodeGenerateFragment"
+            app:destination="@id/QRCodeGenerateFragment"
+            app:popUpTo="@id/create_destination"
+            app:popUpToInclusive="false" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/QRCodeGenerateFragment"
+        android:name="com.ramindu.weeraman.myapplication.ui.generateQRCode.QRCodeGenerateFragment"
+        android:label="@string/third_fragment_label"
+        tools:layout="@layout/fragment_generate_qrcode">
+
+        <action
+            android:id="@+id/action_QRCodeGenerateFragment_to_ServiceSelectionFragment"
+            app:destination="@id/create_destination"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/event_list"
+        android:name="com.ramindu.weeraman.myapplication.ui.manageEvents.EventListFragment"
+        android:label="@string/manage_fragment_label"
+        tools:layout="@layout/fragment_event_list">
+
+        <action
+            android:id="@+id/action_EventListFragment_to_EventDetailsFragment"
+            app:destination="@id/event_details" />
+
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/event_details"
+        android:name="com.ramindu.weeraman.myapplication.ui.manageEvents.EventDetailsFragment"
+        android:label="@string/manage_fragment_label"
+        tools:layout="@layout/fragment_event_details">
+
+    </fragment>
+
+
+
+
+</navigation>

@@ -1,0 +1,68 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion Integer.parseInt(ANDROID_COMPILE_SDK_VERSION)
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(ANDROID_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(ANDROID_TARGET_SDK_VERSION)
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$koinVersion"
+
+    implementation "io.arrow-kt:arrow-core-data:$arrowCoreData"
+    implementation "androidx.core:core-ktx:$coreKtx"
+
+    //hilt
+    implementation "com.google.dagger:hilt-android:$hiltAndroid"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltAndroid"
+    kapt "androidx.hilt:hilt-compiler:$hiltViewModel"
+
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    //testing
+    testImplementation "junit:junit:$jUnit"
+    androidTestImplementation "androidx.test:runner:$testRunner"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion"
+    testImplementation "android.arch.core:core-testing:$architectureComponents"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    androidTestImplementation "androidx.test.ext:junit:$extJunit"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitJupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitJupiter"
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$junitJupiter"
+    testImplementation  "org.junit.vintage:junit-vintage-engine:$junitJupiter"
+    testImplementation  "com.google.truth:truth:$googleTurth"
+    testImplementation  "io.mockk:mockk:$mockK"
+}

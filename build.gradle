@@ -1,0 +1,55 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext {
+        coroutinesVersion = COROUTINES_VERSION
+        retrofitVersion = RETROFIT_VERSION
+        okhttp3LogInterceptor = OKHTTP3_LOGINTERCEPTOR_VERSION
+        architectureComponents = ARHITECTURE_COMPONENTS_VERSION
+        mockitoVersion = MOCKITO_VERSION
+        materialVersion = MATERIAL_VERSION
+        zxingCoreVersion = XZING_CORE_VERSION
+        koinVersion = KOTLIN_VERSION
+        constraintLayout = CONSTRAINT_LAYOUT
+        hiltAndroid = HILT_ANDROID
+        hiltViewModel = HILT_VIEW_MODEL
+        zxingJourneyApps = COM_JOURNEY_APPS_ZXING
+        jUnit = JUNIT
+        testRunner = TEST_RUNNER
+        espressoCore = ESPRESSO_CORE
+        fragmentKtx = FRAGMENT_KTX
+        arrowCoreData = ARROW_CORE_DATA
+        navigationKtx = NAVIGATION_KTX
+        appCompat = APP_COMPAT
+        coreKtx = CORE_KTX
+        materialLoadingProgressbar = MATERIAL_LOADING_PROGRESSBAR
+        extJunit = EXT_JUNIT
+        junitJupiter =  JUNIT_JUPITER
+        googleTurth =GOOGLE_TRUTH
+        mockK =MOCKK
+    }
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$koinVersion"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$HILT_ANDROID"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
