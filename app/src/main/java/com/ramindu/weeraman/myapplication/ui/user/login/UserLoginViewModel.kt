@@ -11,6 +11,7 @@ import com.ramindu.weeraman.domain.entities.LoginResult
 import com.ramindu.weeraman.domain.entities.LoginUser
 import com.ramindu.weeraman.domain.usecases.UserLoginUseCase
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class UserLoginViewModel @ViewModelInject constructor(
@@ -26,7 +27,7 @@ class UserLoginViewModel @ViewModelInject constructor(
             loginStatusLiveData.postValue(true)
             loginResultLiveData.postValue(userLoginUseCase.loginUser(LoginUser(name = userName, password = password)))
             loginStatusLiveData.postValue(false)
+            // userLoginUseCase.loginUser(LoginUser(name = userName, password = password))
         }
     }
-
 }
