@@ -10,6 +10,7 @@ import arrow.core.Either
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
 import com.ramindu.weeraman.domain.entities.ErrorCode
 import com.ramindu.weeraman.domain.usecases.FileSaveUseCase
 import com.ramindu.weeraman.myapplication.QR_CODE_SIZE
@@ -18,14 +19,17 @@ import kotlinx.coroutines.launch
 import java.io.File
 
 
-class QRCodeGenerateViewModel @ViewModelInject constructor(private val fileSaveUseCase: FileSaveUseCase) : ViewModel() {
+class QRCodeGenerateViewModel @ViewModelInject constructor(
+    private val fileSaveUseCase: FileSaveUseCase,
+    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+) : ViewModel() {
 
     val generateStatusLiveData = MutableLiveData<Boolean>()
     val bitMapLiveData = MutableLiveData<Bitmap?>()
     val fileLiveData = MutableLiveData<Either<ErrorCode, File>>()
 
     fun generateQRCode(url: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutinesDispatcherProvider.io) {
             generateStatusLiveData.postValue(true)
             delay(1000)
             try {
@@ -37,7 +41,7 @@ class QRCodeGenerateViewModel @ViewModelInject constructor(private val fileSaveU
                 bitMapLiveData.postValue(barcodeEncoder.createBitmap(bitMatrix))
             } catch (e: Exception) {
                 bitMapLiveData.postValue(null)
-            }finally {
+            } finally {
                 generateStatusLiveData.postValue(false)
             }
         }

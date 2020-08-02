@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.Either
+import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
 import com.ramindu.weeraman.domain.entities.CreateEventModel
 import com.ramindu.weeraman.domain.entities.ErrorCode
 import com.ramindu.weeraman.domain.entities.EventModel
@@ -16,13 +17,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class CreateEventViewModel @ViewModelInject constructor(private val generateEventUseCase: GenerateEventUseCase) :
+class CreateEventViewModel @ViewModelInject constructor(
+    private val generateEventUseCase: GenerateEventUseCase,
+    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+) :
     ViewModel() {
-     val createEventStatus = MutableLiveData<Either<ErrorCode, EventModel>>()
+    val createEventStatus = MutableLiveData<Either<ErrorCode, EventModel>>()
     private var startDate: Date? = null
     private var endDate: Date? = null
-     val startDateLiveData = MutableLiveData<String>()
-     val endDateLiveData = MutableLiveData<String>()
+    val startDateLiveData = MutableLiveData<String>()
+    val endDateLiveData = MutableLiveData<String>()
     val createEventProgressStatusLiveData = MutableLiveData<Boolean>()
 
     fun createEvent(
@@ -40,7 +44,7 @@ class CreateEventViewModel @ViewModelInject constructor(private val generateEven
             endTime = endDate,
             numberOfTickets = numberOfTickets
         )
-        viewModelScope.launch {
+        viewModelScope.launch(coroutinesDispatcherProvider.io) {
             createEventProgressStatusLiveData.postValue(true)
             createEventStatus.postValue(generateEventUseCase.createEvent(createEventModel))
             createEventProgressStatusLiveData.postValue(false)
@@ -55,7 +59,6 @@ class CreateEventViewModel @ViewModelInject constructor(private val generateEven
             selectedHour,
             selectedMinute
         ).time
-
         if (selectingStartDate) {
             startDate = date
             val sdf = SimpleDateFormat(DATE_TIME_FORMAT, Locale.ENGLISH)
