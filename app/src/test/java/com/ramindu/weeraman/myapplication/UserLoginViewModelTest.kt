@@ -34,9 +34,9 @@ class UserLoginViewModelTest {
     private lateinit var userLoginUseCase: UserLoginUseCase
 
     // Set the main coroutines dispatcher for unit testing.
-    @ExperimentalCoroutinesApi
+/*    @ExperimentalCoroutinesApi
     @get:Rule
-    var coroutinesTestRule = CoroutinesTestRule()
+    var coroutinesTestRule = CoroutineTestRule()*/
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
