@@ -44,6 +44,7 @@ class UserTestViewModelTest2 {
     @Test
     fun `getPost actually returns the post I am expecting`() {
         mainCoroutineRule.testDispatcher.runBlockingTest {
+            
             whenever(userTestUseCaseImpl.getValue()).thenReturn(20)
 
             userTestViewModel.userLogin()

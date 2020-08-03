@@ -20,12 +20,13 @@ class UserTestViewModel @ViewModelInject constructor(
     val loginResultLiveData = MutableLiveData<Int>()
 
     fun userLogin() {
-        viewModelScope.launch(dispatcher) {
-            loginStatusLiveData.postValue(true)
-            loginResultLiveData.postValue(userTestUseCase.getValue())
-            loginStatusLiveData.postValue(false)
+        loginStatusLiveData.postValue(true)
 
+        viewModelScope.launch(dispatcher) {
+            loginResultLiveData.postValue(userTestUseCase.getValue())
         }
+
+        loginStatusLiveData.postValue(false)
     }
 }
 
@@ -49,3 +50,4 @@ sealed class State {
     data class Post(val text: String) : State()
 }
  */
+
