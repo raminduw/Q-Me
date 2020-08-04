@@ -9,19 +9,20 @@ import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
 import com.ramindu.weeraman.domain.entities.*
 import com.ramindu.weeraman.domain.usecases.UserLoginUseCase
 import com.ramindu.weeraman.domain.usecases.UserRegisterUseCase
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 
 class UserRegisterViewModel @ViewModelInject constructor(
     private val userRegisterUseCase: UserRegisterUseCase,
-    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val registerStatusLiveData = MutableLiveData<Boolean>()
     val registerResultLiveData = MutableLiveData<Either<ErrorCode, RegisterResult>>()
 
     fun userRegister(userName: String, password: String, confirmPassword: String) {
-        viewModelScope.launch(coroutinesDispatcherProvider.io) {
+        viewModelScope.launch(dispatcher) {
             registerStatusLiveData.postValue(true)
             registerResultLiveData.postValue(userRegisterUseCase.registerUser(RegisterUser(name = userName, password = password, confirmPassword = confirmPassword)))
             registerStatusLiveData.postValue(false)
