@@ -30,6 +30,7 @@ class QRCodeGenerateViewModel @ViewModelInject constructor(
     val fileLiveData = MutableLiveData<Either<ErrorCode, File>>()
 
     fun generateQRCode(url: String) {
+
         viewModelScope.launch(dispatcher) {
             generateStatusLiveData.postValue(true)
             delay(1000)
@@ -46,6 +47,7 @@ class QRCodeGenerateViewModel @ViewModelInject constructor(
                 generateStatusLiveData.postValue(false)
             }
         }
+
     }
 
     fun savePdfFile(document: PdfDocument) {
