@@ -1,26 +1,24 @@
 package com.ramindu.weeraman.myapplication
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.nhaarman.mockitokotlin2.then
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.whenever
 import com.ramindu.weeraman.domain.usecases.UserTestUseCase
+import com.ramindu.weeraman.myapplication.common.MainCoroutineRule
 import com.ramindu.weeraman.myapplication.ui.user.UserTestViewModel
-import io.mockk.impl.annotations.RelaxedMockK
-import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.extension.ExtendWith
-
-
 import org.junit.Rule
 import org.junit.Test
-
+import org.junit.runner.RunWith
+import org.mockito.Mock
+import org.mockito.junit.MockitoJUnitRunner
 
 
 @ExperimentalCoroutinesApi
-@ExtendWith(MockKExtension::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@RunWith(MockitoJUnitRunner::class)
 class UserTestViewModelTest {
 
     @get:Rule
@@ -30,14 +28,14 @@ class UserTestViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    @RelaxedMockK
+    @Mock
     lateinit var userTestUseCaseImpl: UserTestUseCase
 
     private lateinit var userTestViewModel: UserTestViewModel
 
 
     @Before
-    internal fun setUp() {
+    fun setUp() {
         userTestViewModel = UserTestViewModel(userTestUseCaseImpl, mainCoroutineRule.testDispatcher)
     }
 
@@ -45,9 +43,15 @@ class UserTestViewModelTest {
     @Test
     fun `getPost actually returns the post I am expecting`() {
         mainCoroutineRule.testDispatcher.runBlockingTest {
+
+            whenever(userTestUseCaseImpl.getValue()).thenReturn(20)
+
             userTestViewModel.userLogin()
-            assertEquals(2, 2)
-           // coVerify (exactly = 1) { userTestUseCaseImpl.getValue() }
+
+            then(userTestUseCaseImpl).should(times(1)).getValue()
+            assert(userTestViewModel.loginStatusLiveData.value == false)
+            assert(userTestViewModel.loginResultLiveData.value == 20)
+
         }
     }
 

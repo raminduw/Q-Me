@@ -1,6 +1,7 @@
 package com.ramindu.weeraman.myapplication.ui.user
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,11 +16,14 @@ class UserLogoutViewModel @ViewModelInject constructor(
     private val dispatcher: CoroutineDispatcher
 ) :
     ViewModel() {
-    val userLogoutStatus = MutableLiveData<Either<ErrorCode, Boolean>>()
+    private val _userLogoutStatus = MutableLiveData<Either<ErrorCode, Boolean>>()
+
+    val userLogoutStatus: LiveData<Either<ErrorCode, Boolean>>
+        get() = _userLogoutStatus
 
     fun userLogout() {
         viewModelScope.launch(dispatcher) {
-            userLogoutStatus.postValue(userLogoutUseCase.logoutUser())
+            _userLogoutStatus.postValue(userLogoutUseCase.logoutUser())
         }
     }
 

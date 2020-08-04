@@ -10,7 +10,6 @@ import arrow.core.Either
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
 import com.ramindu.weeraman.domain.entities.ErrorCode
 import com.ramindu.weeraman.domain.usecases.FileSaveUseCase
 import com.ramindu.weeraman.myapplication.QR_CODE_SIZE

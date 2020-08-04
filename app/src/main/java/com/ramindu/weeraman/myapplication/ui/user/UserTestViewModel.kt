@@ -4,8 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
-import com.ramindu.weeraman.domain.dispacther.DispatcherProvider
 import com.ramindu.weeraman.domain.usecases.UserTestUseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch

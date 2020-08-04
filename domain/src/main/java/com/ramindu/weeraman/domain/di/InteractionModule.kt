@@ -1,8 +1,7 @@
 package com.ramindu.weeraman.domain.di
 
 
-import com.ramindu.weeraman.domain.dispacther.DispatcherProvider
-import com.ramindu.weeraman.domain.dispacther.DispatcherProviderImpl
+
 import com.ramindu.weeraman.domain.entities.CreateEventModel
 import com.ramindu.weeraman.domain.entities.LoginUser
 import com.ramindu.weeraman.domain.entities.RegisterUser
@@ -63,14 +62,9 @@ abstract class InteractionModule {
     @Binds
     abstract fun bindRegisterValidator(impl: RegisterValidatorImpl): InputValidator<RegisterUser>
 
-
     @ActivityScoped
     @Binds
     abstract fun bindUserTestUseCase(impl: UserTestUseCaseImpl): UserTestUseCase
-
-    @ActivityScoped
-    @Binds
-    abstract fun bindDispatcherProvider(impl: DispatcherProviderImpl): DispatcherProvider
 
 
 }

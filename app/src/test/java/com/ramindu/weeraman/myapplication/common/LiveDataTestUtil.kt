@@ -1,4 +1,4 @@
-package com.ramindu.weeraman.myapplication
+package com.ramindu.weeraman.myapplication.common
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

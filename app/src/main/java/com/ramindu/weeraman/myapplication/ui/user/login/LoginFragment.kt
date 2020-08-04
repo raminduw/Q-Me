@@ -45,7 +45,7 @@ class LoginFragment : Fragment() {
         }
 
         userLoginViewModel.loginResultLiveData.observe(viewLifecycleOwner, Observer {
-            it.fold(ifLeft = { error ->
+            it.fold(ifLeft = {
                 dialogHelperUtil.showToast(context, "Error")
             }, ifRight = { result ->
                 startMainActivity()
