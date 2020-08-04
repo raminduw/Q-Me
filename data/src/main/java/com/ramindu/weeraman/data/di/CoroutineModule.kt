@@ -14,7 +14,7 @@ class CoroutineModule {
 
     @Provides
     @Singleton
-    fun provideDispatcherIo(): CoroutineDispatcher {
-        return Dispatchers.IO
+    fun provideDispatcherDefault(): CoroutineDispatcher {
+        return Dispatchers.Default
     }
 }

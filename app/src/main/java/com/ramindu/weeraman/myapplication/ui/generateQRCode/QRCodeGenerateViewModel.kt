@@ -14,6 +14,7 @@ import com.ramindu.weeraman.data.coroutines.CoroutinesDispatcherProvider
 import com.ramindu.weeraman.domain.entities.ErrorCode
 import com.ramindu.weeraman.domain.usecases.FileSaveUseCase
 import com.ramindu.weeraman.myapplication.QR_CODE_SIZE
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
@@ -21,7 +22,7 @@ import java.io.File
 
 class QRCodeGenerateViewModel @ViewModelInject constructor(
     private val fileSaveUseCase: FileSaveUseCase,
-    private val coroutinesDispatcherProvider: CoroutinesDispatcherProvider
+    private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     val generateStatusLiveData = MutableLiveData<Boolean>()
@@ -29,7 +30,7 @@ class QRCodeGenerateViewModel @ViewModelInject constructor(
     val fileLiveData = MutableLiveData<Either<ErrorCode, File>>()
 
     fun generateQRCode(url: String) {
-        viewModelScope.launch(coroutinesDispatcherProvider.io) {
+        viewModelScope.launch(dispatcher) {
             generateStatusLiveData.postValue(true)
             delay(1000)
             try {

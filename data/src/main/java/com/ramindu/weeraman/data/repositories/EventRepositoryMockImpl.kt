@@ -32,11 +32,25 @@ class EventRepositoryMockImpl @Inject constructor() : EventRepository {
     }
 
     override suspend fun getEventsByUser(userName: String): Either<ErrorCode, MutableList<EventModel>> {
+
         delay(1000)
         val list = mutableListOf<EventModel>()
         list.add(EventModel("ABC123", "Test Event 1", "Test Event Desc"))
         list.add(EventModel("ABC123", "Test Event 2", "Test Event Desc"))
         list.add(EventModel("ABC123", "Test Event 3", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 4", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 5", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 6", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 7", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 8", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 9", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 10", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 11", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 12", "Test Event Desc"))
+
         return list.right()
     }
 

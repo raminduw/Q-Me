@@ -1,5 +1,6 @@
 package com.ramindu.weeraman.myapplication.ui.manageEvents
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class EventsAdapter(var items: List<EventModel>, val callback: Callback) : Recyc
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
+        Log.e("onBindViewHolder", position.toString())
         holder.bind(items[position])
     }
 
@@ -29,6 +31,7 @@ class EventsAdapter(var items: List<EventModel>, val callback: Callback) : Recyc
         private val lastName = itemView.findViewById<TextView>(R.id.itemSubtitleTextView)
 
         fun bind(item: EventModel) {
+            Log.e("bind", item.toString())
             firstName.text = item.name
             lastName.text = item.description
             itemView.setOnClickListener {
