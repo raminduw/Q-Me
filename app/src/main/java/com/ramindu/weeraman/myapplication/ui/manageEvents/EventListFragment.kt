@@ -56,7 +56,7 @@ class EventListFragment : Fragment() {
 
 
         eventListViewModel.eventsLiveData.observe(viewLifecycleOwner, Observer {
-            it.fold(ifLeft = { error ->
+            it.fold(ifLeft = {
                 dialogHelperUtil.showToast(context, "Error")
             }, ifRight = { events ->
                 eventAdapter.setData(events)
