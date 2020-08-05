@@ -47,12 +47,8 @@ class EventListFragment : Fragment() {
 
         eventListViewModel.getEventList()
 
-        eventAdapter = EventsAdapter(mutableListOf(), object : EventsAdapter.Callback {
-            override fun onItemClicked(item: EventModel) {
-                val bundle = bundleOf(EVENT_CODE to item.eventCode)
-                findNavController().navigate(R.id.action_EventListFragment_to_EventDetailsFragment, bundle)
-            }
-        })
+        eventAdapter = EventsAdapter(mutableListOf(), this::startDetailPage)
+
         recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
         }
@@ -75,5 +71,10 @@ class EventListFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun startDetailPage(eventModel: EventModel) {
+        val bundle = bundleOf(EVENT_CODE to eventModel.eventCode)
+        findNavController().navigate(R.id.action_EventListFragment_to_EventDetailsFragment, bundle)
     }
 }

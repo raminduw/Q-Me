@@ -1,6 +1,5 @@
 package com.ramindu.weeraman.myapplication.ui.manageEvents
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramindu.weeraman.domain.entities.EventModel
 import com.ramindu.weeraman.myapplication.R
 
-class EventsAdapter(var items: List<EventModel>, val callback: Callback) : RecyclerView.Adapter<EventsAdapter.MainHolder>() {
+class EventsAdapter(var items: List<EventModel>, val callback: (EventModel) -> Unit) : RecyclerView.Adapter<EventsAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MainHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item_row, parent, false))
 
@@ -33,13 +32,9 @@ class EventsAdapter(var items: List<EventModel>, val callback: Callback) : Recyc
             firstName.text = item.name
             lastName.text = item.description
             itemView.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) callback.onItemClicked(items[adapterPosition])
+                if (adapterPosition != RecyclerView.NO_POSITION) callback(items[adapterPosition])
             }
         }
-    }
-
-    interface Callback {
-        fun onItemClicked(item: EventModel)
     }
 
 }
