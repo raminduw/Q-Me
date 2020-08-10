@@ -57,6 +57,8 @@ class NetworkingModule {
 
 }
 
-private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+//private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+private const val BASE_URL = "https://qr-event-creator.herokuapp.com/"
+
 const val API_KEY = "1ca34d622e60278cc8a62d2f53f2c982"
 

@@ -1,5 +1,6 @@
 package com.ramindu.weeraman.data.repositories
 
+import android.util.Log
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
@@ -14,10 +15,16 @@ import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 
-class EventRepositoryMockImpl @Inject constructor() : EventRepository {
+class EventRepositoryMockImpl @Inject constructor(private val api: EventApi) : EventRepository {
 
     override suspend fun userLogin(loginUser: LoginUser): Either<ErrorCode, LoginResult> {
-        delay(1000)
+        val requestDto = CreateEventRequestDTOTest(
+            "ramindu.weeraman@gmail.com", "Test Event",
+            "Test", 25, "2020/07/20", "2020/07/21", true, false, true
+        )
+        val response = api.createEventTest(requestDto)
+        Log.d("TAG", "Response is : " + response.body().toString())
+        
         return LoginResult("Ramindu", true).right()
     }
 
