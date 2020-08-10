@@ -9,7 +9,7 @@ buildscript {
         mockitoVersion = MOCKITO_VERSION
         materialVersion = MATERIAL_VERSION
         zxingCoreVersion = XZING_CORE_VERSION
-        koinVersion = KOTLIN_VERSION
+        kotlinVersion = KOTLIN_VERSION
         constraintLayout = CONSTRAINT_LAYOUT
         hiltAndroid = HILT_ANDROID
         hiltViewModel = HILT_VIEW_MODEL
@@ -35,8 +35,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$koinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$HILT_ANDROID"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -46,7 +47,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        maven { url "https://jitpack.io" }
     }
 }
 

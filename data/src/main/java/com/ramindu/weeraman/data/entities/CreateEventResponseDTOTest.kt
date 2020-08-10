@@ -2,14 +2,12 @@ package com.ramindu.weeraman.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-
 data class CreateEventResponseDTOTest(
     @SerializedName("error")
     val error: Boolean,
     @SerializedName("event")
     val event: Event
 )
-
 
 data class Event(
     @SerializedName("_id")

@@ -36,7 +36,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$koinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
     implementation "io.arrow-kt:arrow-core-data:$arrowCoreData"
     implementation "androidx.core:core-ktx:$coreKtx"

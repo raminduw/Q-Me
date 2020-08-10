@@ -11,20 +11,24 @@ import com.ramindu.weeraman.domain.NETWORK_EXCEPTION
 import com.ramindu.weeraman.domain.entities.*
 import com.ramindu.weeraman.domain.mapper.Mapper
 import com.ramindu.weeraman.domain.repositories.EventRepository
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import javax.inject.Inject
+
 
 
 class EventRepositoryMockImpl @Inject constructor(private val api: EventApi) : EventRepository {
 
     override suspend fun userLogin(loginUser: LoginUser): Either<ErrorCode, LoginResult> {
-        val requestDto = CreateEventRequestDTOTest(
+      /*  val requestDto = CreateEventRequestDTOTest(
             "ramindu.weeraman@gmail.com", "Test Event",
             "Test", 25, "2020/07/20", "2020/07/21", true, false, true
         )
         val response = api.createEventTest(requestDto)
-        Log.d("TAG", "Response is : " + response.body().toString())
-        
+        Log.d("TAG", "Response is : " + response.body().toString())*/
+
         return LoginResult("Ramindu", true).right()
     }
 
@@ -59,6 +63,27 @@ class EventRepositoryMockImpl @Inject constructor(private val api: EventApi) : E
         list.add(EventModel("ABC123", "Test Event 12", "Test Event Desc"))
 
         return list.right()
+    }
+
+    @FlowPreview
+    override suspend fun getEventList(): Flow<EventModel> {
+        val list = mutableListOf<EventModel>()
+        list.add(EventModel("ABC123", "Test Event 1", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 2", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 3", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 4", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 5", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 6", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 7", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 8", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 9", "Test Event Desc"))
+
+        list.add(EventModel("ABC123", "Test Event 10", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 11", "Test Event Desc"))
+        list.add(EventModel("ABC123", "Test Event 12", "Test Event Desc"))
+        return list.asFlow()
     }
 
     override suspend fun getEventDetailsById(eventId: String): Either<ErrorCode, EventDetailModel> {
