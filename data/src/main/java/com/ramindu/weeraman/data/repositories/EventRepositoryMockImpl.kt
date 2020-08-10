@@ -24,7 +24,7 @@ class EventRepositoryMockImpl @Inject constructor(private val api: EventApi) : E
         )
         val response = api.createEventTest(requestDto)
         Log.d("TAG", "Response is : " + response.body().toString())
-        
+
         return LoginResult("Ramindu", true).right()
     }
 

@@ -33,7 +33,6 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun userLogin(loginUser: LoginUser): Either<ErrorCode, LoginResult> {
         return try {
-            delay(1000)
             val response = api.userLogin(loginUserRequestDTOMapper.transform(loginUser))
             if (!response.isSuccessful) {
                 ErrorCode(NETWORK_ERROR).left()
@@ -52,7 +51,6 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun userRegister(registerUser: RegisterUser): Either<ErrorCode, RegisterResult> {
         return try {
-            delay(1000)
             val response = api.userRegister(registerUserRequestDTOMapper.transform(registerUser))
             if (!response.isSuccessful) {
                 ErrorCode(NETWORK_ERROR).left()
@@ -70,7 +68,6 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun createEvent(createEventModel: CreateEventModel): Either<ErrorCode, EventModel> {
         return try {
-            delay(1000)
             val response = api.createEvent(createEventRequestDTOMapper.transform(createEventModel))
             if (!response.isSuccessful) {
                 ErrorCode(NETWORK_ERROR).left()
@@ -89,7 +86,6 @@ class EventRepositoryImpl @Inject constructor(
     override suspend fun getEventsByUser(userName: String): Either<ErrorCode, MutableList<EventModel>> {
 
         return try {
-            delay(1000)
             val response = api.getEventsByUser(getEventsRequestDTOMapper.transform(userName))
             if (!response.isSuccessful) {
                 ErrorCode(NETWORK_ERROR).left()
@@ -107,7 +103,6 @@ class EventRepositoryImpl @Inject constructor(
 
     override suspend fun getEventDetailsById(eventId: String): Either<ErrorCode, EventDetailModel> {
         return try {
-            delay(1000)
             val response = api.getEventDetailsById(getEventDetailsRequestDTOMapper.transform(eventId))
             if (!response.isSuccessful) {
                 ErrorCode(NETWORK_ERROR).left()
