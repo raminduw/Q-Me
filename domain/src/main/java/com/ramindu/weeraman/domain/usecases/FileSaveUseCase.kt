@@ -10,4 +10,6 @@ interface FileSaveUseCase {
     suspend fun savePdfFile(document: PdfDocument): Either<ErrorCode, File>
 
     //test 3
+
+    //test 4
 }
