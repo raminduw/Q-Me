@@ -45,7 +45,7 @@ dependencies {
     implementation project(":data")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$koinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
     implementation "androidx.appcompat:appcompat:$appCompat"
     implementation "androidx.core:core-ktx:$coreKtx"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationKtx"
@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$architectureComponents"
     implementation "androidx.fragment:fragment-ktx:$fragmentKtx"
     implementation "androidx.lifecycle:lifecycle-extensions:$architectureComponents"
+    implementation 'com.github.myinnos:AlphabetIndex-Fast-Scroll-RecyclerView:1.0.95'
 
     //ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$architectureComponents"

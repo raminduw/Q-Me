@@ -45,7 +45,9 @@ class EventListFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.myEventList)
 
-        eventListViewModel.getEventList()
+       // eventListViewModel.getEventList()
+
+        eventListViewModel.getEvents()
 
         eventAdapter = EventsAdapter(mutableListOf(), this::startDetailPage)
 
@@ -55,7 +57,7 @@ class EventListFragment : Fragment() {
         recyclerView.adapter = eventAdapter
 
 
-        eventListViewModel.eventsLiveData.observe(viewLifecycleOwner, Observer {
+        /*eventListViewModel.eventsLiveData.observe(viewLifecycleOwner, Observer {
             it.fold(ifLeft = {
                 dialogHelperUtil.showToast(context, "Error")
             }, ifRight = { events ->
@@ -69,6 +71,10 @@ class EventListFragment : Fragment() {
             } else {
                 dialogHelperUtil.hideProgressBar()
             }
+        })*/
+
+        eventListViewModel._eventList.observe(viewLifecycleOwner, Observer {
+            eventAdapter.addItem(it)
         })
 
     }

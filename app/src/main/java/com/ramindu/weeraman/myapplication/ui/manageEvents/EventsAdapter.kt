@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ramindu.weeraman.domain.entities.EventModel
 import com.ramindu.weeraman.myapplication.R
 
-class EventsAdapter(var items: List<EventModel>, val callback: (EventModel) -> Unit) : RecyclerView.Adapter<EventsAdapter.MainHolder>() {
+class EventsAdapter(var items: MutableList<EventModel>, val callback: (EventModel) -> Unit) : RecyclerView.Adapter<EventsAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = MainHolder(LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item_row, parent, false))
 
@@ -18,8 +18,13 @@ class EventsAdapter(var items: List<EventModel>, val callback: (EventModel) -> U
         holder.bind(items[position])
     }
 
-    fun setData(dataList: List<EventModel>) {
+   /* fun setData(dataList: List<EventModel>) {
         items = dataList
+        notifyDataSetChanged()
+    }*/
+
+    fun addItem(event : EventModel) {
+        items.add(event)
         notifyDataSetChanged()
     }
 
